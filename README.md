@@ -1,11 +1,10 @@
-Q1 Your form sends data with POST rather than GET. Explain what would go wrong if it used GET instead. Your answer should say something about what a browser does when a page is refreshed.
+Part F
 
-A1 The info inputed will be on the url so a sensitive data will be exposed like passwords
+F1. Which column did you make nullable, and why that one and not another?
+I made the stock column nullable because the medicine's stock quantity might not be recorded yet. The other columns are required because they contain important information about each medicine.
 
-Q2 When validation fails, your controller does not run the code that saves the record — and you did not write an if statement to stop it. Explain what actually stops it, and where the visitor ends up.
+F2. Which step failed first for you, and what did the error say?
+The first error I encountered was running "php artisan migrate:status" it was related to the PHP intl extension. The error indicated that the extension was missing or not enabled. I fixed it by enabling the intl extension in the php.ini configuration file and running the command again.
 
-A2 Laravel will automaticaly stop it the inputed data will just go back form
-
-Q3 Your success message is displayed from the layout, which renders on every page. Explain why it does not appear on every page.
- 
-A3 The succes message only appears if a object it added, the message is only a flash message so when a user refresh it, it dissapears.      
+F3. You changed no Blade file in Part D, yet your pages still work. Why not?
+The pages still work because Laravel uses the MVC architecture. I only changed how the controller retrieves data from the database using the Medicine model. The Blade views can continue displaying the records without changes as long as the controller provides the rigth data.
