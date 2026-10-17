@@ -5,15 +5,17 @@
 
 @section('content')
 
+{{--
 @if($type === 'all' && $stock === 'all')
-    <p> Showing all medicines</p>
+    <p>Showing all medicines</p>
 @elseif($type !== 'all' && $stock !== 'all')
-    <p> Showing medicines: {{ $type }} with stock {{ $stock }}</p>
+    <p>Showing medicines: {{ $type }} with stock {{ $stock }}</p>
 @elseif($type !== 'all')
-    <p> Showing medicines: {{ $type }}</p>
+    <p>Showing medicines: {{ $type }}</p>
 @elseif($stock !== 'all')
-    <p> Showing stock of medicines: {{ $stock }}</p>
+    <p>Showing stock: {{ $stock }}</p>
 @endif
+--}}
     
    <nav>
     <a href="{{ route('medicines.index') }}">All</a>

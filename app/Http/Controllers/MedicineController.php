@@ -3,50 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Medicine;
 
 class MedicineController extends Controller
 {
-    private function medicines(){
-        $path = storage_path('app/medicines.json');
-
-        return json_decode(file_get_contents($path), true);
-    }
-
-    private function saveMedicines(array $medicines){
-
-        file_put_contents(storage_path('app/medicines.json'),
-        json_encode($medicines, JSON_PRETTY_PRINT)
-        );
-
-    }
 
     public function index(Request $request)
     {
-        $type = $request->query('type', 'all');
-        $stock = $request->query('stock', 'all');
-
-        $all = $this->medicines();
-
-        if($type === 'all' && $stock === 'all'){
-
-            $medicines = $all;
-
-        } else {
-            $medicines = [];
-
-            foreach($all as $id => $medicine){
-
-                if (($type === 'all' || $medicine['type'] == $type)
-                    && ($stock === 'all' || $medicine['stock'] == $stock)) {
-                    $medicines[$id] = $medicine;
-                }
-            }
-
-        }
-
-         return view('medicines.index',
-         ['medicines' => $medicines,
-          'type' => $type, 'stock' => $stock]);
+        $medicines = Medicine::all();
+        return view('medicines.index', compact('medicines'));
     }
 
     /**
@@ -94,16 +59,9 @@ class MedicineController extends Controller
      */
     public function show($id = 5)
     {
-
-        $medicines = $this->medicines();
-
-            if(!isset($medicines[$id]))
-            {
-
-                abort(404);
-            }
-
-            return view('medicines.show', ['medicine' => $medicines[$id]]);
+        $medicines = Medicine::findOrFail($id);
+        return view('medicines.show', compact('medicines'));    
+       
 
     }
 
